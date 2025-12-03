@@ -46,7 +46,7 @@ Implemented using **React Router DOM**:
 ## 📸 Screenshots
 
 ### Signup Page
-![Signup Screenshot](./screenshots/signup.png)
+![Signup Screenshot](Screenshot/Screenshot (151).png)
 
 ### Login Page
 ![Login Screenshot](./screenshots/login.png)
