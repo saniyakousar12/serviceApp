@@ -1,6 +1,6 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./SignupPage.css";   // Import CSS
 
 function SignupPage() {
   const navigate = useNavigate();
@@ -34,45 +34,51 @@ function SignupPage() {
   };
 
   return (
-    <div className="signup-bg d-flex justify-content-center align-items-center">
-      <div className="signup-card shadow-lg p-4">
-        <h3 className="text-center mb-3 signup-title">Create Your Account</h3>
+    <div className="min-h-screen flex items-center justify-center bg-[#dfe3ee] p-5">
+      <div className="w-full max-w-md bg-white/60 backdrop-blur-lg rounded-xl p-8 border border-black/20 shadow-xl animate-fadeIn">
+        <h3 className="text-center mb-6 text-2xl font-bold text-[#1b1f3b]">
+          Create Your Account
+        </h3>
 
-        <form onSubmit={submitForm}>
+        <form onSubmit={submitForm} className="space-y-4">
           <input
             type="email"
             name="email"
-            className="form-control signup-input mb-3"
             placeholder="Email"
             onChange={handleChange}
             required
+            className="w-full h-12 px-4 rounded-lg border border-gray-300 focus:border-[#fca311] focus:ring focus:ring-[#fca311]/40 outline-none transition"
           />
 
           <input
             type="password"
             name="password"
-            className="form-control signup-input mb-3"
             placeholder="Password"
             onChange={handleChange}
             required
+            className="w-full h-12 px-4 rounded-lg border border-gray-300 focus:border-[#fca311] focus:ring focus:ring-[#fca311]/40 outline-none transition"
           />
 
           <input
             type="password"
             name="confirmPassword"
-            className="form-control signup-input mb-3"
             placeholder="Confirm Password"
             onChange={handleChange}
             required
+            className="w-full h-12 px-4 rounded-lg border border-gray-300 focus:border-[#fca311] focus:ring focus:ring-[#fca311]/40 outline-none transition"
           />
 
-          <label className="fw-bold mb-1 signup-label">Choose Role</label>
+          <label className="font-semibold text-[#1b1f3b] block mb-2">
+            Choose Role
+          </label>
 
-          <div className="d-flex justify-content-between mt-2 mb-3">
+          <div className="flex gap-2 mb-4">
             <button
               type="button"
-              className={`btn role-btn w-50 me-2 ${
-                form.role === "provider" ? "selected-role" : ""
+              className={`flex-1 h-12 rounded-lg font-semibold border border-gray-400 transition ${
+                form.role === "provider"
+                  ? "bg-[#fca311] text-black border-[#fca311] shadow-md"
+                  : "bg-gray-200 text-[#1b1f3b] hover:bg-white hover:border-gray-600"
               }`}
               onClick={() => setForm({ ...form, role: "provider" })}
             >
@@ -81,8 +87,10 @@ function SignupPage() {
 
             <button
               type="button"
-              className={`btn role-btn w-50 ${
-                form.role === "customer" ? "selected-role" : ""
+              className={`flex-1 h-12 rounded-lg font-semibold border border-gray-400 transition ${
+                form.role === "customer"
+                  ? "bg-[#fca311] text-black border-[#fca311] shadow-md"
+                  : "bg-gray-200 text-[#1b1f3b] hover:bg-white hover:border-gray-600"
               }`}
               onClick={() => setForm({ ...form, role: "customer" })}
             >
@@ -90,18 +98,35 @@ function SignupPage() {
             </button>
           </div>
 
-          <button type="submit" className="btn signup-btn w-100">
+          <button
+            type="submit"
+            className="w-full h-12 bg-[#fca311] border-2 border-[#b8750b] text-black font-bold rounded-lg hover:bg-[#ffbe33] hover:border-[#a06306] transition transform hover:-translate-y-1"
+          >
             Sign Up
           </button>
 
-          <p className="text-center mt-2 login-text">
+          <p className="text-center text-gray-700 mt-2">
             Already have an account?{" "}
-            <span className="login-link" onClick={() => navigate("/login")}>
+            <span
+              onClick={() => navigate("/login")}
+              className="text-[#1b1f3b] font-bold cursor-pointer hover:underline"
+            >
               Login
             </span>
           </p>
         </form>
       </div>
+
+      {/* Tailwind custom animation */}
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(15px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.8s ease-in-out;
+        }
+      `}</style>
     </div>
   );
 }
