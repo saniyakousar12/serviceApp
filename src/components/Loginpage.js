@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./LoginPage.css";
@@ -32,27 +33,29 @@ function Loginpage() {
   };
 
   return (
-    <div className="login-bg">
-      <div className="login-card">
-        <h3 className="text-center mb-3 login-title">Login</h3>
+    <div className="min-h-screen flex items-center justify-center bg-[#dfe3ee] p-5">
+      <div className="w-full max-w-md bg-white/60 backdrop-blur-lg rounded-xl p-8 border border-black/20 shadow-xl animate-fadeIn">
+        <h3 className="text-center mb-6 text-2xl font-bold text-[#1b1f3b]">
+          Login
+        </h3>
 
-        <form onSubmit={submitLogin}>
+        <form onSubmit={submitLogin} className="space-y-4">
           <input
             type="email"
             name="email"
-            className="form-control login-input mb-3"
             placeholder="Email"
             onChange={handleChange}
             required
+            className="w-full h-12 px-4 rounded-lg border border-gray-300 focus:border-[#fca311] focus:ring focus:ring-[#fca311]/40 outline-none transition"
           />
 
           <input
             type="password"
             name="password"
-            className="form-control login-input mb-3"
             placeholder="Password"
             onChange={handleChange}
             required
+            className="w-full h-12 px-4 rounded-lg border border-gray-300 focus:border-[#fca311] focus:ring focus:ring-[#fca311]/40 outline-none transition"
           />
 
           {/* ROLE SELECTION DROPDOWN */}
@@ -79,6 +82,17 @@ function Loginpage() {
           </p>
         </form>
       </div>
+
+      {/* Tailwind custom animation */}
+      <style>{`
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(15px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fadeIn {
+          animation: fadeIn 0.7s ease-in-out;
+        }
+      `}</style>
     </div>
   );
 }
