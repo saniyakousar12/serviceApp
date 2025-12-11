@@ -1,10 +1,16 @@
 
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./LoginPage.css";
 
 function Loginpage() {
   const navigate = useNavigate();
+
+  // State for email, password
   const [login, setLogin] = useState({ email: "", password: "" });
+
+  // State for role (customer or provider)
+  const [role, setRole] = useState("");
 
   const handleChange = (e) => {
     setLogin({ ...login, [e.target.name]: e.target.value });
@@ -12,6 +18,17 @@ function Loginpage() {
 
   const submitLogin = (e) => {
     e.preventDefault();
+
+    // Check role and redirect
+    if (role === "customer") {
+      navigate("/customer");
+    } else if (role === "provider") {
+      navigate("/provider");
+    } else {
+      alert("Please select a role");
+      return;
+    }
+
     alert("Login Successful!");
   };
 
@@ -41,18 +58,24 @@ function Loginpage() {
             className="w-full h-12 px-4 rounded-lg border border-gray-300 focus:border-[#fca311] focus:ring focus:ring-[#fca311]/40 outline-none transition"
           />
 
-          <button
-            type="submit"
-            className="w-full h-12 bg-[#fca311] border-2 border-[#b8750b] text-black font-bold rounded-lg hover:bg-[#ffbe33] hover:border-[#a06306] transition transform hover:-translate-y-1"
+          {/* ROLE SELECTION DROPDOWN */}
+          <select
+            className="form-control login-input mb-3"
+            onChange={(e) => setRole(e.target.value)}
+            required
           >
-            Login
-          </button>
+            <option value="">Select Role</option>
+            <option value="customer">Customer</option>
+            <option value="provider">Service Provider</option>
+          </select>
 
-          <p className="text-center text-gray-700 mt-2">
-            Don’t have an account?{" "}
+          <button className="btn login-btn w-100">Login</button>
+
+          <p className="text-center mt-2 login-text">
+            Don't have an account?{" "}
             <span
+              className="signup-link"
               onClick={() => navigate("/signup")}
-              className="text-[#1b1f3b] font-bold cursor-pointer hover:underline"
             >
               Sign Up
             </span>
