@@ -19,6 +19,7 @@ import {
   Wrench,
   Sparkles,
   Brush,
+  LogOut,   // ✅ ADD THIS
 } from "lucide-react";
 
 export const Icons = {
@@ -42,6 +43,7 @@ export const Icons = {
   Wrench,
   Sparkles,
   Brush,
+  LogOut,   // ✅ ADD THIS
 };
 
 export function getCategoryIcon(name) {
