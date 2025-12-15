@@ -1,74 +1,10 @@
-// import { Link } from "react-router-dom";
-// import { Icons } from "./icons";
-// import { cn } from "../lib/utils";
-
-// export default function DashboardLayout({
-//   children,
-//   navItems = [],
-//   currentPath = "",
-// }) {
-//   return (
-//     <div className="min-h-screen flex bg-background">
-//       {/* SIDEBAR */}
-//       <aside className="w-64 border-r border-border hidden md:flex flex-col">
-//         <div className="h-16 flex items-center px-6 border-b border-border">
-//           <div className="flex items-center gap-2">
-//             <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-//               <Icons.Zap className="w-5 h-5 text-primary-foreground" />
-//             </div>
-//             <span className="font-bold text-lg">QuickServe</span>
-//           </div>
-//         </div>
-
-//         <nav className="flex-1 p-4 space-y-1">
-//           {navItems.map((item) => {
-//             const Icon = Icons[item.icon];
-//             const isActive = currentPath === item.href;
-
-//             return (
-//               <Link
-//                 key={item.href}
-//                 to={item.href}
-//                 className={cn(
-//                   "flex items-center gap-3 px-3 py-2 rounded-lg text-sm transition-colors",
-//                   isActive
-//                     ? "bg-primary text-primary-foreground"
-//                     : "text-muted-foreground hover:bg-muted"
-//                 )}
-//               >
-//                 {Icon && <Icon className="w-4 h-4" />}
-//                 <span>{item.label}</span>
-//               </Link>
-//             );
-//           })}
-//         </nav>
-//       </aside>
-
-//       {/* MAIN CONTENT */}
-//       <div className="flex-1 flex flex-col">
-//         {/* TOPBAR */}
-//         <header className="h-16 border-b border-border flex items-center justify-between px-6">
-//           <p className="font-medium">Provider Panel</p>
-
-//           <div className="flex items-center gap-3">
-//             <div className="w-9 h-9 rounded-full bg-primary/10 flex items-center justify-center">
-//               <Icons.User className="w-5 h-5 text-primary" />
-//             </div>
-//           </div>
-//         </header>
-
-//         {/* PAGE CONTENT */}
-//         <main className="flex-1 overflow-y-auto">{children}</main>
-//       </div>
-//     </div>
-//   );
-// }
-
 import { useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 import { Button } from "../components/ui/button";
 import { Icons } from "../components/icons";
 
 export default function DashboardLayout({
+  title = "Dashboard",
   navItems = [],
   currentPath,
   children,
@@ -76,44 +12,65 @@ export default function DashboardLayout({
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    // future: clear auth / token
     navigate("/login");
   };
 
   return (
     <div className="flex min-h-screen bg-background">
+
       {/* SIDEBAR */}
-      <aside className="w-64 border-r bg-card flex flex-col">
-        {/* LOGO / TITLE */}
-        <div className="p-4 border-b">
-          <h2 className="text-xl font-bold">Provider Panel</h2>
+      <motion.aside
+        initial={{ x: -80, opacity: 0 }}
+        animate={{ x: 0, opacity: 1 }}
+        transition={{ duration: 0.4, ease: "easeOut" }}
+        className="w-64 border-r bg-card flex flex-col"
+      >
+        {/* TITLE / LOGO */}
+        <div className="p-5 border-b">
+          <h2 className="text-xl font-bold tracking-tight">
+            {title}
+          </h2>
+          <p className="text-xs text-muted-foreground mt-1">
+            QuickServe Dashboard
+          </p>
         </div>
 
         {/* NAV ITEMS */}
         <nav className="flex-1 p-3 space-y-1">
-          {navItems.map((item) => {
+          {navItems.map((item, index) => {
             const Icon = Icons[item.icon];
             const active = currentPath === item.href;
 
             return (
-              <button
+              <motion.button
                 key={item.label}
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: index * 0.05 }}
                 onClick={() => navigate(item.href)}
-                className={`w-full flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition
+                className={`relative w-full flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-medium transition
                   ${
                     active
-                      ? "bg-primary text-primary-foreground"
+                      ? "bg-primary text-primary-foreground shadow"
                       : "hover:bg-muted text-foreground"
                   }`}
               >
                 {Icon && <Icon className="w-5 h-5" />}
                 {item.label}
-              </button>
+
+                {/* ACTIVE INDICATOR */}
+                {active && (
+                  <motion.span
+                    layoutId="active-indicator"
+                    className="absolute right-2 w-2 h-2 rounded-full bg-primary-foreground"
+                  />
+                )}
+              </motion.button>
             );
           })}
         </nav>
 
-        {/* LOGOUT (BOTTOM) */}
+        {/* LOGOUT */}
         <div className="p-3 border-t">
           <Button
             variant="ghost"
@@ -124,12 +81,17 @@ export default function DashboardLayout({
             Logout
           </Button>
         </div>
-      </aside>
+      </motion.aside>
 
       {/* MAIN CONTENT */}
-      <main className="flex-1 bg-muted/30 overflow-y-auto">
+      <motion.main
+        initial={{ opacity: 0, y: 12 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.3 }}
+        className="flex-1 bg-muted/30 overflow-y-auto"
+      >
         {children}
-      </main>
+      </motion.main>
     </div>
   );
 }
