@@ -1,5 +1,3 @@
-
-
 import {
   Home,
   Briefcase,
@@ -9,7 +7,6 @@ import {
   User,
   Zap,
   DollarSign,
-  IndianRupee,
   Users,
   Plus,
   Edit,
@@ -22,9 +19,7 @@ import {
   Wrench,
   Sparkles,
   Brush,
-  LogOut,
-  Search,      // ✅ ADD
-  MapPin,      // ✅ ADD
+  LogOut,   // ✅ ADD THIS
 } from "lucide-react";
 
 export const Icons = {
@@ -36,7 +31,6 @@ export const Icons = {
   User,
   Zap,
   DollarSign,
-  IndianRupee,
   Users,
   Plus,
   Edit,
@@ -49,9 +43,7 @@ export const Icons = {
   Wrench,
   Sparkles,
   Brush,
-  LogOut,
-  Search,
-  MapPin,
+  LogOut,   // ✅ ADD THIS
 };
 
 export function getCategoryIcon(name) {
