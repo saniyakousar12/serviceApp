@@ -1,4 +1,5 @@
 // src/pages/provider/providerNavItems.js
+
 export const providerNavItems = [
   { label: "Dashboard", href: "/provider", icon: "Home" },
   { label: "Listings", href: "/provider/listings", icon: "Briefcase" },

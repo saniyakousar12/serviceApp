@@ -13,7 +13,7 @@ import {
 } from "../../components/ui/tabs";
 import { Icons } from "../../components/icons";
 import { providerNavItems } from "./providerNavItems";
-
+import ProviderSidebar from "./ProviderSidebar";
 const bookingsData = [
   {
     id: "1",
